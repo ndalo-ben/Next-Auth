@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./provider/provider";
+import Appbar from "./components/Appbar";
 
 
 export const metadata: Metadata = {
@@ -14,9 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body>
         <Providers>
+          <Appbar />
           {children}
         </Providers>
       </body>
