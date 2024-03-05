@@ -2,11 +2,12 @@
 
 import { EnvelopeIcon, EyeIcon, EyeSlashIcon, KeyIcon, PhoneIcon, UserIcon } from "@heroicons/react/20/solid"
 import { Button, Checkbox, Input } from "@nextui-org/react"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import validator from "validator";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+const { passwordStrength } = require('check-password-strength')
 
 const FormSchema = z.object({
   firstName: z
@@ -43,11 +44,24 @@ type InputType = z.infer<typeof FormSchema>;
 
 const SignUpForm = () => {
   // react hook form 
-  const { register, handleSubmit, reset, control, formState: { errors } } = useForm<InputType>({
-    resolver: zodResolver(FormSchema),
-  });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    watch,
+    formState: { errors } } = useForm<InputType>({
+      resolver: zodResolver(FormSchema),
+    });
 
   const [isVisible, setIsVisible] = useState(false);
+
+  // check pass strength 
+  const [passStrength, setPassStrength] = useState(0);
+
+  useEffect(() => {
+    setPassStrength(passwordStrength(watch().password).id);
+  }, [watch().password]);
 
   // show/hide password 
   const toggleVisible = () => setIsVisible(prev => !prev);
