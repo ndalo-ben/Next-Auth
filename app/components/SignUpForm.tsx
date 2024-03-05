@@ -7,6 +7,7 @@ import { z } from "zod";
 import validator from "validator";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import PasswordStrength from "./PasswordStrength";
 const { passwordStrength } = require('check-password-strength')
 
 const FormSchema = z.object({
@@ -117,6 +118,7 @@ const SignUpForm = () => {
           <EyeSlashIcon onClick={toggleVisible} className="w-4 cursor-pointer" />
         )}
       />
+      <PasswordStrength passStrength={passStrength}/>
       <Input
         errorMessage={errors.confirmPassword?.message}
         isInvalid={!!errors.confirmPassword}
