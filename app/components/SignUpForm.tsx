@@ -3,6 +3,22 @@
 import { EnvelopeIcon, EyeIcon, EyeSlashIcon, KeyIcon, PhoneIcon, UserIcon } from "@heroicons/react/20/solid"
 import { Button, Checkbox, Input } from "@nextui-org/react"
 import { useState } from "react";
+import { z } from "zod";
+
+const FormSchema = z.object({
+  firstName: z
+    .string()
+    .min(2, "First Name must be at least 2 characters long")
+    .max(45, "First Name must be at most 50 characters long")
+    .regex(new RegExp("^[a-zA-Z ]+$"), "No special characters allowed!"),
+  lastName: z
+    .string()
+    .min(2, "Last Name must be at least 2 characters long")
+    .max(45, "Last Name must be at most 50 characters long")
+    .regex(new RegExp("^[a-zA-Z ]+$"), "No special characters allowed!"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().regex(new RegExp("^[0-9]{8}$"), "Invalid phone number"),
+})
 
 const SignUpForm = () => {
   const [isVisible, setIsVisible] = useState(false);
