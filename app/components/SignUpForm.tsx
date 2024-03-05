@@ -8,6 +8,7 @@ import validator from "validator";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PasswordStrength from "./PasswordStrength";
+import { registerUser } from "@/lib/actions/authActions";
 const { passwordStrength } = require('check-password-strength')
 
 const FormSchema = z.object({
@@ -69,7 +70,12 @@ const SignUpForm = () => {
 
   // save user 
   const saveUser: SubmitHandler<InputType> = async (data) => {
-    console.log({ data });
+    const { accepted, confirmPassword, ...user } = data;
+    try {
+      const result = await registerUser(user);
+    } catch (error) {
+
+    }
     reset();
   }
 
@@ -118,7 +124,7 @@ const SignUpForm = () => {
           <EyeSlashIcon onClick={toggleVisible} className="w-4 cursor-pointer" />
         )}
       />
-      <PasswordStrength passStrength={passStrength}/>
+      <PasswordStrength passStrength={passStrength} />
       <Input
         errorMessage={errors.confirmPassword?.message}
         isInvalid={!!errors.confirmPassword}
