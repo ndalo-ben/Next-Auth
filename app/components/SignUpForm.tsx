@@ -6,6 +6,7 @@ import { useState } from "react";
 import { z } from "zod";
 import validator from "validator";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const FormSchema = z.object({
   firstName: z
@@ -35,14 +36,16 @@ const FormSchema = z.object({
   }),
 }).refine(data => data.password === data.confirmPassword, {
   message: "Passwords do not match",
-  path: ["password", "confirmPassword"],
+  path: ["confirmPassword"],
 });
 
 type InputType = z.infer<typeof FormSchema>;
 
 const SignUpForm = () => {
   // react hook form 
-  const { register, handleSubmit, reset, control } = useForm<InputType>();
+  const { register, handleSubmit, reset, control, formState: { errors } } = useForm<InputType>({
+    resolver: zodResolver(FormSchema),
+  });
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -58,27 +61,37 @@ const SignUpForm = () => {
   return (
     <form onSubmit={handleSubmit(saveUser)} className="grid grid-cols-2 gap-3 p-2 shadow place-self-stretch border rounded-md">
       <Input
+        errorMessage={errors.firstName?.message}
+        isInvalid={!!errors.firstName}
         {...register("firstName")}
         label="First Name"
         startContent={<UserIcon
           className="w-4" />} />
       <Input
+        errorMessage={errors.lastName?.message}
+        isInvalid={!!errors.lastName}
         {...register("lastName")}
         label="Last Name"
         startContent={<UserIcon className="w-4" />} />
       <Input
+        errorMessage={errors.email?.message}
+        isInvalid={!!errors.email}
         {...register("email")}
         label="Email"
         className="col-span-2"
         startContent={<EnvelopeIcon className="w-4" />}
       />
       <Input
+        errorMessage={errors.phone?.message}
+        isInvalid={!!errors.phone}
         {...register("phone")}
         label="Phone"
         className="col-span-2"
         startContent={<PhoneIcon className="w-4" />}
       />{""}
       <Input
+        errorMessage={errors.password?.message}
+        isInvalid={!!errors.password}
         {...register("password")}
         type={isVisible ? "text" : "password"}
         label="Password"
@@ -91,6 +104,8 @@ const SignUpForm = () => {
         )}
       />
       <Input
+        errorMessage={errors.confirmPassword?.message}
+        isInvalid={!!errors.confirmPassword}
         {...register("confirmPassword")}
         type={isVisible ? "text" : "password"}
         label="Confirm Password"
@@ -109,6 +124,9 @@ const SignUpForm = () => {
           </Checkbox>
         )}
       />
+      {errors.accepted && (
+        <p className="col-span-2 text-red-500 text-xs">{errors.accepted.message}</p>
+      )}
       <div className="flex justify-center col-span-2">
         <Button className="w-48" color="primary" type="submit">Submit</Button>
       </div>
