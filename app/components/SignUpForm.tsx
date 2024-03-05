@@ -9,6 +9,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import PasswordStrength from "./PasswordStrength";
 import { registerUser } from "@/lib/actions/authActions";
+import { toast } from "react-toastify";
 const { passwordStrength } = require('check-password-strength')
 
 const FormSchema = z.object({
@@ -73,8 +74,10 @@ const SignUpForm = () => {
     const { accepted, confirmPassword, ...user } = data;
     try {
       const result = await registerUser(user);
+      toast.success("User registered successfully");
     } catch (error) {
-
+      toast.error("Error registering user");
+      console.log(error);
     }
     reset();
   }
