@@ -4,6 +4,7 @@ import { EnvelopeIcon, EyeIcon, EyeSlashIcon, KeyIcon, PhoneIcon, UserIcon } fro
 import { Button, Checkbox, Input } from "@nextui-org/react"
 import { useState } from "react";
 import { z } from "zod";
+import validator from "validator";
 
 const FormSchema = z.object({
   firstName: z
@@ -17,7 +18,23 @@ const FormSchema = z.object({
     .max(45, "Last Name must be at most 50 characters long")
     .regex(new RegExp("^[a-zA-Z ]+$"), "No special characters allowed!"),
   email: z.string().email("Invalid email address"),
-  phone: z.string().regex(new RegExp("^[0-9]{8}$"), "Invalid phone number"),
+  phone: z.string().refine(validator.isMobilePhone, "Please enter a valid phone number"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters long")
+    .max(50, "Password must be at most 50 characters long"),
+  confirmPassword: z
+    .string()
+    .min(8, "Password must be at least 8 characters long")
+    .max(50, "Password must be at most 50 characters long"),
+  accepted: z.literal(true, {
+    errorMap: () => ({
+      message: "Please accept the terms and conditions to continue.",
+    }),
+  }),
+}).refine(data => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["password", "confirmPassword"],
 })
 
 const SignUpForm = () => {
