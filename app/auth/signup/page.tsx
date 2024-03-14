@@ -1,6 +1,6 @@
 import SignInButton from "@/app/components/SignInButton"
 import SignUpForm from "@/app/components/SignUpForm"
-import { Image, Link } from "@nextui-org/react"
+import { Image } from "@nextui-org/react"
 
 const SignupPage = () => {
     return (
