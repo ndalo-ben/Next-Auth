@@ -15,12 +15,12 @@ export const authOptions: AuthOptions = {
                 username: {
                     label: "User Name",
                     type: "text",
-                    placeholder: "jsmith"
+                    placeholder: "johndoe@gmail.com"
                 },
                 password: {
                     label: "Password",
                     type: "password",
-                    placeholder: "Password"
+                    placeholder: "*********"
                 }
             },
 
