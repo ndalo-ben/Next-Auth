@@ -77,7 +77,7 @@ const SignUpForm = () => {
       toast.success("User registered successfully");
     } catch (error) {
       toast.error("Error registering user");
-      console.log(error);
+      console.error(error);
     }
     reset();
   }
@@ -153,7 +153,9 @@ const SignUpForm = () => {
         <p className="col-span-2 text-red-500 text-xs">{errors.accepted.message}</p>
       )}
       <div className="flex justify-center col-span-2">
-        <Button className="w-48" color="primary" type="submit">Submit</Button>
+        <Button className="w-48" color="primary" type="submit">
+          Submit
+        </Button>
       </div>
     </form>
   )
