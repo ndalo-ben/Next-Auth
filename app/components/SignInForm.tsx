@@ -41,10 +41,11 @@ const SignInForm = (props: Props) => {
             toast.error(result?.error)
             return;
         }
+        toast.success("Signed in successfully")
         router.push(props.callbackUrl ? props.callbackUrl : "/")
     }
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2 p-2 border rounded-sm">
             <Input
                 {...register("email")}
                 label="Email"
@@ -52,7 +53,8 @@ const SignInForm = (props: Props) => {
             />
             <Input
                 {...register("password")}
-                label="********"
+                type={visiblePass ? "text" : "password"}
+                label="Password"
                 errorMessage={errors.password?.message}
                 endContent={
                     <button
@@ -66,6 +68,7 @@ const SignInForm = (props: Props) => {
                     </button>
                 }
             />
+            
             <div className="flex items-center justify-center">
                 <Button
                     color="primary"
@@ -74,7 +77,7 @@ const SignInForm = (props: Props) => {
                     isLoading={isSubmitting}>
                     {isSubmitting ? "Signing in..." : "Sign in"}
                 </Button>
-                <Button as={Link}>Sign Up</Button>
+                <Button as={Link} href="/auth/signup">Sign Up</Button>
             </div>
         </form>
     )

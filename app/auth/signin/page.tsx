@@ -1,14 +1,13 @@
 import Link from "next/link"
 import SignInForm from "@/app/components/SignInForm"
 
-const SignIn = (props: any) => {
+const SignIn = () => {
     return (
         <div>
-            <SignInForm {...props}>
-                <Link href={"/auth/forgotPass"}>
-                    Forgot Your Password?
-                </Link>
-            </SignInForm>
+            <SignInForm />
+            <Link href={"/auth/forgotPass"}>
+                Forgot Your Password?
+            </Link>
         </div>
     )
 }
