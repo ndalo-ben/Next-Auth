@@ -11,12 +11,21 @@ const SignInButton = () => {
             {session && session.user ? (
                 <>
                     <p>{session.user.email}</p>
-                    <Link href="/api/auth/signout" className="text-sky-500 hover:text-sky-600 transition-colors">Sign Out</Link>
+                    <Link href="/api/auth/signout" className="text-sky-500 hover:text-sky-600 transition-colors">
+                        Sign Out
+                    </Link>
                 </>
             ) : (
-                <Button as={Link} href={"/api/auth/signin"}>Sign In</Button>
+                <>
+                    <Button as={Link} href={"/api/auth/signin"}>
+                        Sign In
+                    </Button>
+                    <Button as={Link} href={"/auth/signup"}>
+                        Sign Up
+                    </Button>
+                </>
             )
-    }
+            }
         </div>
     )
 }
