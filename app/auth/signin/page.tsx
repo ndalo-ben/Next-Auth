@@ -3,7 +3,7 @@ import SignInForm from "@/app/components/SignInForm"
 
 const SignIn = () => {
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center ">
             <SignInForm />
             <Link href={"/auth/forgotPass"}>
                 Forgot Your Password?
