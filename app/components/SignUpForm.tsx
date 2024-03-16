@@ -64,7 +64,7 @@ const SignUpForm = () => {
 
   useEffect(() => {
     setPassStrength(passwordStrength(watch().password).id);
-  }, [watch().password]);
+  }, [watch]);
 
   // show/hide password 
   const toggleVisible = () => setIsVisible(prev => !prev);
