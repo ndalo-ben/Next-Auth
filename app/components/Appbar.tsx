@@ -12,7 +12,7 @@ const Appbar = () => {
                 </NavbarItem>
             </NavbarContent>
             <NavbarContent justify="end">
-               <SignInButton></SignInButton>
+               <SignInButton />
             </NavbarContent>
         </Navbar>
     )
