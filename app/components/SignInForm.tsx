@@ -57,18 +57,18 @@ const SignInForm = (props: Props) => {
                 label="Password"
                 errorMessage={errors.password?.message}
                 endContent={
-                    <button
+                    <div
                         onClick={() => setVisiblePass((prev) => !prev)}>
                         {
                             visiblePass ? (
-                                <EyeSlashIcon className="w-4" />
-                            ) : (
                                 <EyeIcon className="w-4" />
+                            ) : (
+                                <EyeSlashIcon className="w-4" />
                             )}
-                    </button>
+                    </div>
                 }
             />
-            
+
             <div className="flex items-center justify-center">
                 <Button
                     color="primary"
