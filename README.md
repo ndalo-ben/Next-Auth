@@ -50,10 +50,22 @@ This is a Next.js application next-auth web-app with a variety of dependencies f
 - `validator`: A library of string validators and sanitizers.
 - `zod`: A TypeScript-first schema declaration and validation library.
 
-## Installation
+## Getting Started
 
-To install the dependencies, run the following command:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- Node.js installed on your local machine. You can download it from [here](https://nodejs.org/).
+
+### Cloning the Repository
+
+To clone the repository and run the app on your local machine, follow these steps:
+
+1. Open your terminal.
+
+2. Clone the repository by running:
 
 ```bash
-npm install
+git clone https://github.com/ndalo-ben/Next-Auth.git
 ```
