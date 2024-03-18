@@ -6,7 +6,7 @@ interface Props {
 
 const ActivationPage = ({ params }: Props) => {
     return (
-        <div>ActivationPage</div>
+        <div>{params.id}</div>
     )
 }
 
