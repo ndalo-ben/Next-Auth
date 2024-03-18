@@ -3,13 +3,13 @@ import nodemailer from 'nodemailer';
 export async function sendMail(
     { to, subject, body }:
         { to: string, subject: string, body: string }) {
-    const { SMTP_EMAIL, SMTP_GMAIL_PASS } = process.env;
+    const { SMTP_EMAIL, SMTP_USER, SMTP_PASS } = process.env;
     var transport = nodemailer.createTransport({
         host: "sandbox.smtp.mailtrap.io",
         port: 2525,
         auth: {
-            user: "70732773505ee4",
-            pass: "105f5378b17776"
+            user: SMTP_USER,
+            pass: SMTP_PASS
         }
     });
 
