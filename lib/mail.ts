@@ -4,15 +4,13 @@ export async function sendMail(
     { to, subject, body }:
         { to: string, subject: string, body: string }) {
     const { SMTP_EMAIL, SMTP_GMAIL_PASS } = process.env;
-    const transport = nodemailer.createTransport({
-        service: "Gmail",
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: true,
+    var transport = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
         auth: {
-            user: SMTP_EMAIL,
-            pass: SMTP_GMAIL_PASS,
-        },
+            user: "70732773505ee4",
+            pass: "105f5378b17776"
+        }
     });
 
     try {
